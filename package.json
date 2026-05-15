@@ -9,5 +9,9 @@
     "postinstall": "wix sync-types",
     "dev": "wix dev",
     "lint": "eslint ."
+  },
+  "dependencies": {
+    "wix-data": "^0.0.1-security",
+    "wix-location": "^1.0.1"
   }
 }

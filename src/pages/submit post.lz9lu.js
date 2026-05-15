@@ -1,5 +1,5 @@
 
-  import { submitPost } from 'backend/communityPosts.jsw';
+  import { submitPost } from '../backend/communityPosts.web.js';
   import { currentMember } from 'wix-members';
   import wixWindow from 'wix-window';
   import wixLocation from 'wix-location';
@@ -26,6 +26,7 @@
       $w('#submitBtn').disable();
       $w('#errorMsg').hide();
       try {
+        console.log('submitPost submitBtn on click');
         await submitPost(title, content);
         $w('#titleInput').value = '';
         $w('#contentInput').value = '';
