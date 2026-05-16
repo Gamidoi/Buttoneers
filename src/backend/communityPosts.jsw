@@ -8,7 +8,7 @@
     const member = await currentMember.getMember();
     if (!member) throw new Error('Not authenticated');
     const roles = await currentMember.getRoles();
-    if (!roles.some(r => r.title === 'Moderator')) throw new Error('Access denied');
+    if (!roles.some(r => r.title === 'Moderator') && !roles.some(r => r.title === 'Admin')) throw new Error('Access denied');
   }
 
   export async function submitPost(title, content) {
