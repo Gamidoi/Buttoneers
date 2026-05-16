@@ -32,7 +32,11 @@
         let imageUrl = null;
         if ($w('#imageUpload').value.length > 0) {
           const uploadResult = await $w('#imageUpload').startUpload();
+          console.log('Upload result:', JSON.stringify(uploadResult));
           imageUrl = uploadResult.fileUrl;
+          console.log('imageUrl to submit:', imageUrl);
+        } else {
+          console.log('No image selected');
         }
         await submitPost(title, content, imageUrl);
         $w('#titleInput').value = '';
