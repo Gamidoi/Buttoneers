@@ -25,6 +25,7 @@
       $item('#authorText').text = 'By ' + itemData.authorName;
       if (itemData.imageUrl) {
         $item('#postImage').src = itemData.imageUrl;
+        $item('#postImage').fitMode = 'fit';
         $item('#postImage').show();
       } else {
         $item('#postImage').hide();
