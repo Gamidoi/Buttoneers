@@ -1,10 +1,18 @@
-// API Reference: https://www.wix.com/velo/reference/api-overview/introduction
-// “Hello, World!” Example: https://learn-code.wix.com/en/article/hello-world
+import { getApprovedPosts } from 'backend/communityPosts.jsw';
 
-$w.onReady(function () {
-    // Write your JavaScript here
+  $w.onReady(async function () {
+    $w('#noPostsText').hide();
 
-    // To select an element by ID use: $w('#elementID')
-
-    // Click 'Preview' to run your code
-});
+    const posts = await getApprovedPosts();
+    if (posts.length === 0) {
+      $w('#noPostsText').show();
+      $w('#postRepeater').hide();
+      return;
+    } 
+    $w('#postRepeater').data = posts;
+    $w('#postRepeater').onItemReady(($item, itemData) => {
+      $item('#titleText').text = itemData.title;
+      $item('#contentText').text = itemData.content;
+      $item('#authorText').text = 'By ' + itemData.authorName;
+    });
+  });
