@@ -2,8 +2,7 @@ import { currentMember } from 'wix-members';
 
 function hideAdminTab() {
     const menu = $w('#horizontalMenu1');
-    const adminLabels = ['admin review', 'admin add challenge'];
-    menu.menuItems = menu.menuItems.filter(item => !adminLabels.includes(item.label.toLowerCase().trim()));
+    menu.menuItems = menu.menuItems.filter(item => item.label.toLowerCase().trim() !== 'admin');
 }
 
 $w.onReady(async function () {
