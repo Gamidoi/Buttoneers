@@ -1,5 +1,5 @@
 
-  import { submitPost } from 'backend/communityPosts.web';
+  import { submitPost } from 'backend/communityPosts.jsw';
   import { currentMember } from 'wix-members';
   import wixWindow from 'wix-window';
   import wixLocation from 'wix-location';

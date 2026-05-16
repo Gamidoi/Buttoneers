@@ -1,4 +1,4 @@
-import { getApprovedPosts } from 'backend/communityPosts.web';
+import { getApprovedPosts } from 'backend/communityPosts.jsw';
   import { currentMember } from 'wix-members';
   
   $w.onReady(async function () {

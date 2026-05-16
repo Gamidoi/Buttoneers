@@ -1,5 +1,5 @@
 
-  import { getPendingPosts, approvePost, rejectPost } from 'backend/communityPosts.web';
+  import { getPendingPosts, approvePost, rejectPost } from 'backend/communityPosts.jsw';
   import { currentMember } from 'wix-members';
   import wixLocation from 'wix-location';
   
