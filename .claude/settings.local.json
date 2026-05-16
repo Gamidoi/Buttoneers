@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(Get-ChildItem -Path \"C:\\\\Users\\\\Joe\\\\WebstormProjects\\\\Buttoneers\" -Recurse -Depth 2)",
+      "Bash(Select-Object -First 50)"
+    ]
+  }
+}

@@ -5,8 +5,7 @@
   import wixLocation from 'wix-location';
 
   $w.onReady(async function () {
-    $w('#successMsg').hide();
-    $w('#errorMsg').hide();
+    $w('#statusMessage').hide();
 
     $w('#imageUpload').fileType = 'Image';
     $w('#imageUpload').buttonLabel = 'Add a Photo (optional)';
@@ -22,30 +21,27 @@
       const title = $w('#titleInput').value.trim();
       const content = $w('#contentInput').value.trim();
       if (!title || !content) {
-        $w('#errorMsg').text = 'Please fill in both title and content.';
-        $w('#errorMsg').show();
+        $w('#statusMessage').text = 'Please fill in both title and content.';
+        $w('#statusMessage').show();
         return;
       }
       $w('#submitBtn').disable();
-      $w('#errorMsg').hide();
+      $w('#statusMessage').hide();
       try {
         let imageUrl = null;
         if ($w('#imageUpload').value.length > 0) {
           const uploadResult = await $w('#imageUpload').startUpload();
-          console.log('Upload result:', JSON.stringify(uploadResult));
           imageUrl = uploadResult.url;
-          console.log('imageUrl to submit:', imageUrl);
-        } else {
-          console.log('No image selected');
         }
         await submitPost(title, content, imageUrl);
         $w('#titleInput').value = '';
         $w('#contentInput').value = '';
         $w('#imageUpload').reset();
-        $w('#successMsg').show();
+        $w('#statusMessage').text = 'Post submitted successfully!';
+        $w('#statusMessage').show();
       } catch (e) {
-        $w('#errorMsg').text = 'Submission failed. Please try again.';
-        $w('#errorMsg').show();
+        $w('#statusMessage').text = 'Submission failed. Please try again.';
+        $w('#statusMessage').show();
       } finally {
         $w('#submitBtn').enable();
       }
