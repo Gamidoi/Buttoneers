@@ -23,6 +23,12 @@
       $item('#titleText').text = itemData.title;
       $item('#contentText').text = itemData.content;
       $item('#authorText').text = 'By ' + itemData.authorName;
+      if (itemData.imageUrl) {
+        $item('#postImage').src = itemData.imageUrl;
+        $item('#postImage').show();
+      } else {
+        $item('#postImage').hide();
+      }
       $item('#approveBtn').onClick(async () => {
         await approvePost(itemData._id); 
         posts = posts.filter(p => p._id !== itemData._id);

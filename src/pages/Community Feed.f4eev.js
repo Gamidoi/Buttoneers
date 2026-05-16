@@ -14,5 +14,11 @@ import { getApprovedPosts } from 'backend/communityPosts.jsw';
       $item('#titleText').text = itemData.title;
       $item('#contentText').text = itemData.content;
       $item('#authorText').text = 'By ' + itemData.authorName;
+      if (itemData.imageUrl) {
+        $item('#postImage').src = itemData.imageUrl;
+        $item('#postImage').show();
+      } else {
+        $item('#postImage').hide();
+      }
     });
   });
