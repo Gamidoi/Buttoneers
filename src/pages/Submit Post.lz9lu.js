@@ -3,18 +3,21 @@
   import { currentMember } from 'wix-members';
   import wixWindow from 'wix-window';
   import wixLocation from 'wix-location';
-  
+
   $w.onReady(async function () {
     $w('#successMsg').hide();
     $w('#errorMsg').hide();
-    
+
+    $w('#imageUpload').fileType = 'Image';
+    $w('#imageUpload').buttonLabel = 'Add a Photo (optional)';
+
     const member = await currentMember.getMember();
-    if (!member) { 
+    if (!member) {
       await wixWindow.openLightbox('Log In');
       const check = await currentMember.getMember();
       if (!check) { wixLocation.to('/'); return; }
-    } 
-    
+    }
+
     $w('#submitBtn').onClick(async () => {
       const title = $w('#titleInput').value.trim();
       const content = $w('#contentInput').value.trim();
@@ -22,14 +25,20 @@
         $w('#errorMsg').text = 'Please fill in both title and content.';
         $w('#errorMsg').show();
         return;
-      } 
+      }
       $w('#submitBtn').disable();
       $w('#errorMsg').hide();
       try {
-        await submitPost(title, content);
+        let imageUrl = null;
+        if ($w('#imageUpload').value.length > 0) {
+          const uploadResult = await $w('#imageUpload').startUpload();
+          imageUrl = uploadResult.fileUrl;
+        }
+        await submitPost(title, content, imageUrl);
         $w('#titleInput').value = '';
         $w('#contentInput').value = '';
-        $w('#successMsg').show(); 
+        $w('#imageUpload').reset();
+        $w('#successMsg').show();
       } catch (e) {
         $w('#errorMsg').text = 'Submission failed. Please try again.';
         $w('#errorMsg').show();

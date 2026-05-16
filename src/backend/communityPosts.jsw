@@ -11,12 +11,13 @@
     if (!roles.some(r => r.title === 'Moderator') && !roles.some(r => r.title === 'Admin')) throw new Error('Access denied');
   }
 
-  export async function submitPost(title, content) {
+  export async function submitPost(title, content, imageUrl = null) {
     const member = await currentMember.getMember({ fieldsets: ['FULL'] });
     if (!member) throw new Error('Must be logged in to post.');
     const authorName = member.profile?.nickname || member.profile?.name?.first || 'Member';
     const item = await wixData.insert(COLLECTION, {
       title, content,
+      ...(imageUrl && { imageUrl }),
       authorId: member._id,
       authorName,
       status: 'pending'
