@@ -26,7 +26,6 @@
       $w('#submitBtn').disable();
       $w('#errorMsg').hide();
       try {
-        console.log('submitPost submitBtn on click');
         await submitPost(title, content);
         $w('#titleInput').value = '';
         $w('#contentInput').value = '';

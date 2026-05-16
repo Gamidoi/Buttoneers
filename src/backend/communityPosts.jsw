@@ -12,7 +12,6 @@
   }
 
   export async function submitPost(title, content) {
-    console.log('submitPost in communityPosts');
     const member = await currentMember.getMember({ fieldsets: ['FULL'] });
     if (!member) throw new Error('Must be logged in to post.');
     const authorName = member.profile?.nickname || member.profile?.name?.first || 'Member';
@@ -34,14 +33,11 @@
   }
 
   export async function getPendingPosts() {
-    console.log('getPendingPosts() comunityPosts.jsw a');
     await requireAdmin();
-    console.log('getPendingPosts() comunityPosts.jsw b');
     const results = await wixData.query(COLLECTION)
       .eq('status', 'pending')
       .ascending('_createdDate')
       .find({ suppressAuth: true });
-    console.log('getPendingPosts() comunityPosts.jsw c');
     return results.items;
   }
 

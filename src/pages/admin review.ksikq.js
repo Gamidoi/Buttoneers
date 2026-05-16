@@ -10,16 +10,12 @@
     $w('#noPendingText').hide();
     
     const member = await currentMember.getMember();
-	console.log(member);
     if (!member) { wixLocation.to('/'); return; }
-    
+
     const roles = await currentMember.getRoles();
-	console.log(roles[0].title);
     if (!roles.some(r => r.title === 'Moderator') && !roles.some(r => r.title === 'Admin')) { wixLocation.to('/'); return; }
-	console.log("filtered to admins");
 
     posts = await getPendingPosts();
-	console.log(posts);
     if (posts.length === 0) { $w('#noPendingText').show(); return; }
 	
     $w('#postRepeater').data = posts;

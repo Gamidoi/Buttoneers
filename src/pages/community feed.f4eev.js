@@ -1,13 +1,8 @@
 import { getApprovedPosts } from 'backend/communityPosts.jsw';
-  import { currentMember } from 'wix-members';
-  
+
   $w.onReady(async function () {
     $w('#noPostsText').hide();
-    $w('#writePostBtn').hide();
-    
-    const member = await currentMember.getMember();
-    if (member) $w('#writePostBtn').show();
-    
+
     const posts = await getApprovedPosts();
     if (posts.length === 0) {
       $w('#noPostsText').show();
