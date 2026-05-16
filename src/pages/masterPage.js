@@ -1,10 +1,15 @@
-// API Reference: https://www.wix.com/velo/reference/api-overview/introduction
-// “Hello, World!” Example: https://learn-code.wix.com/en/article/hello-world
+import { currentMember } from 'wix-members';
 
-$w.onReady(function () {
-    // Write your JavaScript here
+$w.onReady(async function () {
+    const member = await currentMember.getMember().catch(() => null);
+    if (!member) {
+        $w('#adminReviewTab').hide();
+        return;
+    }
 
-    // To select an element by ID use: $w('#elementID')
-
-    // Click 'Preview' to run your code
+    const roles = await currentMember.getRoles().catch(() => []);
+    const isAdmin = roles.some(r => r.title === 'Admin' || r.title === 'Moderator');
+    if (!isAdmin) {
+        $w('#adminReviewTab').hide();
+    }
 });
